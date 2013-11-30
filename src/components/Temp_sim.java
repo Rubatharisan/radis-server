@@ -3,7 +3,7 @@ package components;
 public class Temp_sim implements Runnable {
 
 	private double temperature = 21.0;
-	private double set_temp;
+	private double set_temp = 21.0;
 	private long sleeptime = 100;
 	
 	@Override
@@ -59,8 +59,11 @@ public class Temp_sim implements Runnable {
 		return temperature;
 	}
 
-	public void setTemperature(int set_temp) {
-		this.set_temp = set_temp +1;
+	public void setTemperature(double current_temp) {
+		this.set_temp = current_temp +1;
+	}
+	public double getSetTemp(){
+		return set_temp;
 	}
 	
 
