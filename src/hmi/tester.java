@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
@@ -16,7 +17,7 @@ import org.jfree.data.time.TimeSeriesCollection;
 import components.Temp_sim;
 
 public class tester {
-    static TimeSeries ts = new TimeSeries("data", Millisecond.class);
+    static TimeSeries ts = new TimeSeries("Current Temperature", Millisecond.class);
 
     public static void main(String[] args) throws InterruptedException {
         gen myGen = new gen();
@@ -34,11 +35,17 @@ public class tester {
         );
         
         final XYPlot plot = chart.getXYPlot();
-        XYLineAndShapeRenderer renderer = (XYLineAndShapeRenderer)plot.getRenderer();
-        renderer.setBaseShapesVisible(true);
-        renderer.setBaseShapesFilled(true);
-        ValueAxis axis = plot.getDomainAxis();
-        axis.setFixedAutoRange(60000.0);
+
+        ValueAxis xaxis = plot.getRangeAxis();
+        xaxis.setRange(xaxis.getDefaultAutoRange());
+    
+     
+        
+        NumberAxis yaxis = (NumberAxis) plot.getRangeAxis();
+        yaxis.setRange(0, 50);
+        
+        
+        
 
         JFrame frame = new JFrame("GraphTest");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,11 +67,11 @@ public class tester {
             while(true) {
     
                 ts.addOrUpdate(new Millisecond(), temp.getTemperature());
-                try {
+                /** try {
                     Thread.sleep(10000);
                 } catch (InterruptedException ex) {
                     System.out.println(ex);
-                }
+                } **/
             }
         }
     }
