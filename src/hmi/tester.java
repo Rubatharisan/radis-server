@@ -37,7 +37,12 @@ public class tester {
         final XYPlot plot = chart.getXYPlot();
 
         ValueAxis xaxis = plot.getRangeAxis();
-        xaxis.setRange(xaxis.getDefaultAutoRange());
+ 
+        xaxis.setAutoRange(true);
+       
+        //Domain axis would show data of 60 seconds for a time
+        xaxis.setFixedAutoRange(60000.0);  // 60 seconds
+        xaxis.setVerticalTickLabels(true);
     
      
         
