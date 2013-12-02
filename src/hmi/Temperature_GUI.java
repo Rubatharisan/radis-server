@@ -82,6 +82,7 @@ public class Temperature_GUI extends JFrame {
 		
 		textField = new JTextField();
 		textField.setText(String.valueOf(temp.getSetTemp())+" \u2103");
+		textField.setEditable(false);
 		textField.setPreferredSize(new Dimension(95,95));
 		panel.add(textField);
 		textField.setColumns(10);
@@ -102,12 +103,13 @@ public class Temperature_GUI extends JFrame {
 		    	textField_1.setText(String.valueOf(temp.getTemperature())+" \u2103");
 		    }
 		});
+		this.textField_1.setEditable(false);
 		updater.start();
 		JPanel center = new JPanel();
 		contentPane.add(center, BorderLayout.CENTER);
 		
 		
-		this.series = new TimeSeries("Temperature Data", Millisecond.class);
+		this.series = new TimeSeries("Temperature", Millisecond.class);
 		final TimeSeriesCollection dataset = new TimeSeriesCollection(this.series);
 	    final JFreeChart chart = createChart(dataset);
 	    timer.setInitialDelay(1000);
@@ -137,6 +139,7 @@ public class Temperature_GUI extends JFrame {
         plot.setDomainGridlinePaint(Color.lightGray);
         plot.setRangeGridlinesVisible(true);
         plot.setRangeGridlinePaint(Color.lightGray);
+       
                 
         ValueAxis xaxis = plot.getDomainAxis();
         xaxis.setAutoRange(true);
