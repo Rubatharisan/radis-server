@@ -1,18 +1,23 @@
 package hmi;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-
+import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HMIstart extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2074814726152549528L;
 	private JPanel contentPane;
 	private JPanel panel;
 	private JPanel panel_1;
@@ -22,6 +27,10 @@ public class HMIstart extends JFrame {
 	private JButton moist_btn;
 	private JButton temperature_btn;
 	private JButton water_btn;
+	private JPanel panel_2;
+	private JPanel panel_3;
+	private Temperature_GUI temp_gui;
+	private Co2_GUI co2_gui;
 
 	/**
 	 * Launch the application.
@@ -44,44 +53,83 @@ public class HMIstart extends JFrame {
 	 */
 	public HMIstart() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 457, 383);
+		setBounds(100, 100, 600, 500);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(this.contentPane);
 		this.contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
+		Font font = new Font("Tahoma",Font.PLAIN,25);
+		
 		this.panel = new JPanel();
 		this.contentPane.add(this.panel);
 		this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.PAGE_AXIS));
 		
+		this.panel_2 = new JPanel();
+		this.panel.add(this.panel_2);
+		
 		this.co2_btn = new JButton("Co2 Levels");
-		this.co2_btn.setPreferredSize(new Dimension(105,105));
-		this.panel.add(this.co2_btn);
+		this.co2_btn.addActionListener(new Co2_btnActionListener());
+		this.co2_btn.setFont(font);
+		this.panel_2.add(this.co2_btn);
+		this.co2_btn.setPreferredSize(new Dimension(155,105));
 		
 		this.fertalize_btn = new JButton("Fertalizing");
-		this.fertalize_btn.setPreferredSize(new Dimension(105,105));
-		this.panel.add(this.fertalize_btn);
+		this.panel_2.add(this.fertalize_btn);
+		this.fertalize_btn.setPreferredSize(new Dimension(155,105));
+		this.fertalize_btn.setFont(font);
 		
 		this.light_btn = new JButton("Light Levels");
-		this.light_btn.setPreferredSize(new Dimension(105,105));
-		this.panel.add(this.light_btn);
+		this.panel_2.add(this.light_btn);
+		this.light_btn.setPreferredSize(new Dimension(155,105));
+		this.light_btn.setFont(font);
 		
 		this.panel_1 = new JPanel();
 		this.contentPane.add(this.panel_1);
 		this.panel_1.setLayout(new BoxLayout(this.panel_1, BoxLayout.PAGE_AXIS));
 		
+		this.panel_3 = new JPanel();
+		this.panel_1.add(this.panel_3);
+		
 		this.moist_btn = new JButton("Air Humidity");
-		this.moist_btn.setPreferredSize(new Dimension(105,105));
-		this.panel_1.add(this.moist_btn);
+		this.panel_3.add(this.moist_btn);
+		this.moist_btn.setPreferredSize(new Dimension(155,105));
+		this.moist_btn.setFont(font);
 		
 		this.temperature_btn = new JButton("Temperature");
-		this.temperature_btn.setPreferredSize(new Dimension(105,105));
-		this.panel_1.add(this.temperature_btn);
+		this.temperature_btn.addActionListener(new Temperature_btnActionListener());
+		this.panel_3.add(this.temperature_btn);
+		this.temperature_btn.setPreferredSize(new Dimension(155,105));
+		this.temperature_btn.setFont(font);
+		
 		
 		this.water_btn = new JButton("Water Level");
-		this.water_btn.setPreferredSize(new Dimension(105, 105));
-		this.panel_1.add(this.water_btn);
-	
+		this.panel_3.add(this.water_btn);
+		this.water_btn.setPreferredSize(new Dimension(155, 105));
+		this.water_btn.setFont(font);
+		UnitInit();
+	}
+	public void UnitInit(){
+		temp_gui = new Temperature_GUI();
+		temp_gui.setVisible(false);
+		
+		co2_gui = new Co2_GUI();
+		co2_gui.setVisible(false);
+		
+		
 	}
 
+	private class Temperature_btnActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			temp_gui.setVisible(true);
+			
+			
+		}
+	}
+	private class Co2_btnActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			co2_gui.setVisible(true);
+		}
+	}
+	
 }

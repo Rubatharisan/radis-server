@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,6 +28,8 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import components.Temp_sim;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
@@ -69,28 +72,37 @@ public class Temperature_GUI extends JFrame {
 		
 		JPanel Button_Panel = new JPanel();
 		contentPane.add(Button_Panel, BorderLayout.EAST);
-		Button_Panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		Button_Panel.setLayout(new BorderLayout(0, 0));
 		
 		JPanel panel = new JPanel();
-		Button_Panel.add(panel);
+		Button_Panel.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		
+		JPanel panel_1 = new JPanel();
+		panel.add(panel_1);
+		
 		JButton btnUp = new JButton("Up");
+		panel_1.add(btnUp);
 		btnUp.addActionListener(new BtnUpActionListener());
-		btnUp.setPreferredSize(new Dimension(105,105));
-		panel.add(btnUp);
+		btnUp.setPreferredSize(new Dimension(150, 105));
 		
 		textField = new JTextField();
+		Font font = new Font("Tahoma",Font.PLAIN,30);
 		textField.setText(String.valueOf(temp.getSetTemp())+" \u2103");
 		textField.setEditable(false);
 		textField.setPreferredSize(new Dimension(95,95));
+		textField.setFont(font);
+		textField.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 		panel.add(textField);
 		textField.setColumns(10);
 		
+		JPanel panel_2 = new JPanel();
+		panel.add(panel_2);
+		
 		JButton btnDown = new JButton("Down");
+		panel_2.add(btnDown);
 		btnDown.addActionListener(new BtnDownActionListener());
-		btnDown.setPreferredSize(new Dimension(105,105));
-		panel.add(btnDown);
+		btnDown.setPreferredSize(new Dimension(150, 105));
 		
 		JLabel lblCurrentTemperature = new JLabel("current temperature:");
 		panel.add(lblCurrentTemperature);
@@ -100,10 +112,20 @@ public class Temperature_GUI extends JFrame {
 		this.textField_1.setColumns(10);
 		final Timer updater = new Timer(1000, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		    	textField_1.setText(String.valueOf(temp.getTemperature())+" \u2103");
+		    	 DecimalFormat df = new DecimalFormat("##.00");
+		    	String getTemp = df.format(temp.getTemperature());
+		    	 textField_1.setText(getTemp+" \u2103");
 		    }
 		});
 		this.textField_1.setEditable(false);
+		
+		JPanel panel_3 = new JPanel();
+		Button_Panel.add(panel_3, BorderLayout.SOUTH);
+		
+		JButton btnReturn = new JButton("Return");
+		btnReturn.addActionListener(new BtnReturnActionListener());
+		btnReturn.setPreferredSize(new Dimension(150, 105));
+		panel_3.add(btnReturn);
 		updater.start();
 		JPanel center = new JPanel();
 		contentPane.add(center, BorderLayout.CENTER);
@@ -181,6 +203,11 @@ public class Temperature_GUI extends JFrame {
 			temp.setTemperature(current_temp);
 			textField.setText(String.valueOf(current_temp)+" \u2103");
 			
+		}
+	}
+	private class BtnReturnActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			setVisible(false);
 		}
 	}
 
