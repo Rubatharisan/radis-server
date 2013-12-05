@@ -1,17 +1,18 @@
 package components;
 
+import hmi.HMIstartReadings;
+
 public class Temp_sim implements Runnable {
 
 	private double temperature = 21.0;
 	private double set_temp = 21.0;
 	private long sleeptime = 100;
-	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		HMIstartReadings setTemp = new HMIstartReadings();
 		while(true){
-			
+	
 			if(temperature <= set_temp)
 			{
 				temperature = temperature +0.1;
@@ -20,7 +21,7 @@ public class Temp_sim implements Runnable {
 			else if(temperature > set_temp)
 			{	
 				new Runnable(){
-
+					
 					@Override
 					public void run() {
 					
@@ -36,7 +37,7 @@ public class Temp_sim implements Runnable {
 							}
 						}
 						
-					}
+					} 
 					
 				}.run();
 			}

@@ -27,6 +27,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
 import components.CO2_sim;
+import components.Temp_sim;
 
 public class HMIstartReadings extends JPanel {
 	private JPanel center_panel;
@@ -81,6 +82,8 @@ public class HMIstartReadings extends JPanel {
 	private JLabel lblLastUpdated;
 	private JTextField updaterLabel;
 	private JLabel lblLastRead;
+	private Temp_sim temp_sim;
+	private double temp;
 
 
 	/**
@@ -293,6 +296,7 @@ public class HMIstartReadings extends JPanel {
 		    	updaterLabel.setText(dateFormat.format(cal.getTime()));
 		    	System.out.println(dateFormat.format(cal.getTime()));
 		    	
+		    	
 		    }
 		});
 		updater.start();
@@ -302,6 +306,7 @@ public class HMIstartReadings extends JPanel {
 		//Metode der skal hente Hvilke produkt der bliver berarbejdet.
 		
 	}
+
 	public void setFonts(){
 		Component[] cl_left_components = CL_left.getComponents();
 		

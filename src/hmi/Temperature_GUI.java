@@ -207,6 +207,7 @@ public class Temperature_GUI extends JFrame {
 	}
 	private class BtnReturnActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+
 			setVisible(false);
 		}
 	}

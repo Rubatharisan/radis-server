@@ -136,6 +136,7 @@ public class HMIstart extends JFrame {
 
 	private class Temperature_btnActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			
 			temp_gui.setVisible(true);
 			
 			
@@ -143,6 +144,7 @@ public class HMIstart extends JFrame {
 	}
 	private class Co2_btnActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			
 			co2_gui.setVisible(true);
 		}
 	}
