@@ -11,6 +11,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.Component;
 
 public class HMIstart extends JFrame {
 
@@ -31,6 +33,8 @@ public class HMIstart extends JFrame {
 	private JPanel panel_3;
 	private Temperature_GUI temp_gui;
 	private Co2_GUI co2_gui;
+	private JPanel panel_4;
+	private JLabel lblPlantNr;
 
 	/**
 	 * Launch the application.
@@ -53,16 +57,23 @@ public class HMIstart extends JFrame {
 	 */
 	public HMIstart() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 600, 500);
+		setBounds(100, 100, 631, 722);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(this.contentPane);
-		this.contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		Font font = new Font("Tahoma",Font.PLAIN,25);
+		this.contentPane.setLayout(new BoxLayout(this.contentPane, BoxLayout.PAGE_AXIS));
+		
+		this.lblPlantNr = new JLabel("Plant nr. 1");
+		this.lblPlantNr.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.contentPane.add(this.lblPlantNr);
+		
+		this.panel_4 = new JPanel();
+		this.contentPane.add(this.panel_4);
 		
 		this.panel = new JPanel();
-		this.contentPane.add(this.panel);
+		this.panel_4.add(this.panel);
 		this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.PAGE_AXIS));
 		
 		this.panel_2 = new JPanel();
@@ -85,7 +96,7 @@ public class HMIstart extends JFrame {
 		this.light_btn.setFont(font);
 		
 		this.panel_1 = new JPanel();
-		this.contentPane.add(this.panel_1);
+		this.panel.add(this.panel_1);
 		this.panel_1.setLayout(new BoxLayout(this.panel_1, BoxLayout.PAGE_AXIS));
 		
 		this.panel_3 = new JPanel();
@@ -107,6 +118,10 @@ public class HMIstart extends JFrame {
 		this.panel_3.add(this.water_btn);
 		this.water_btn.setPreferredSize(new Dimension(155, 105));
 		this.water_btn.setFont(font);
+		
+		JPanel readings = new HMIstartReadings();
+		contentPane.add(readings);
+
 		UnitInit();
 	}
 	public void UnitInit(){

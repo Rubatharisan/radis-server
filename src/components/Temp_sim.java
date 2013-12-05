@@ -27,7 +27,7 @@ public class Temp_sim implements Runnable {
 						for(double i = 0.0; i < 2.0;i = i+0.05)
 						{
 							temperature = temperature -0.05;
-							System.out.println("Temperature is: \t"+temperature);
+						//	System.out.println("Temperature is: \t"+temperature);
 							try {
 								Thread.sleep(sleeptime);
 							} catch (InterruptedException e) {
@@ -40,7 +40,7 @@ public class Temp_sim implements Runnable {
 					
 				}.run();
 			}
-			System.out.println("Temperature is: \t"+temperature);
+		//	System.out.println("Temperature is: \t"+temperature);
 		
 			try {
 				Thread.sleep(sleeptime);
