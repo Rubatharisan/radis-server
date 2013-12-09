@@ -46,7 +46,7 @@ public class Co2_GUI extends JFrame {
 	private Timer timer = new Timer(250, new tempListener());
 	private CO2_sim simulator;
 	private JButton btnReturn;
-	private Font font_on, font_off;
+	private Font font_on;
 
 	/**
 	 * Launch the application.
@@ -105,6 +105,33 @@ public class Co2_GUI extends JFrame {
 		valveStat.setText("OFF");
 		valveStat.setFont(font_on);
 		valveStat.setForeground(Color.RED);
+		Timer onoffupdater = new Timer(500, new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(simulator.co2_getOperator() == true){
+					valveStat.setText("ON");
+					valveStat.setFont(font_on);
+					valveStat.setForeground(Color.GREEN);
+					toggleButton.setSelected(true);
+				}
+				else if(simulator.co2_getOperator() == false){
+					if(simulator.co2_isActive() == true){
+						valveStat.setText("ON");
+						valveStat.setFont(font_on);
+						valveStat.setForeground(Color.GREEN);
+						toggleButton.setSelected(true);
+					}else{
+						valveStat.setText("OFF");
+						valveStat.setFont(font_on);
+						valveStat.setForeground(Color.RED);
+						toggleButton.setSelected(false);
+					}
+				}
+			}
+			
+		});
 	
 		
 		
@@ -114,7 +141,7 @@ public class Co2_GUI extends JFrame {
 		final Timer updater = new Timer(1000, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	 DecimalFormat df = new DecimalFormat("0000.00");
-		    	String getTemp = df.format(simulator.getCo2());
+		    	 String getTemp = df.format(simulator.getCo2());
 		    	 textField.setText(getTemp+" PPM");
 		    }
 		});
@@ -138,6 +165,7 @@ public class Co2_GUI extends JFrame {
 	    this.panel_3.add(chartPanel);
 	        timer.start();
 	        updater.start();
+	        onoffupdater.start();
 	        
 	        
 		
@@ -191,14 +219,16 @@ public class Co2_GUI extends JFrame {
 
 				if(toggleButton.isSelected() == true)
 				{
-						simulator.setActive(toggleButton.isSelected());
+						simulator.co2_setActive(false);
+						simulator.co2_setOperator(true);
 						valveStat.setText("ON");
 						valveStat.setFont(font_on);
 						valveStat.setForeground(Color.GREEN);
 				}
 				else if(toggleButton.isSelected() == false){
 					
-					simulator.setActive(false);
+					simulator.co2_setOperator(false);
+					simulator.co2_setActive(true);
 					valveStat.setText("OFF");
 					valveStat.setFont(font_on);
 					valveStat.setForeground(Color.RED);

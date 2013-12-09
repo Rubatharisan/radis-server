@@ -10,7 +10,7 @@ public class Temp_sim implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		HMIstartReadings setTemp = new HMIstartReadings();
+
 		while(true){
 	
 			if(temperature <= set_temp)

@@ -19,6 +19,8 @@ public class HMIstart extends JFrame {
 	/**
 	 * 
 	 */
+	private Light_GUI light_gui;
+	private Fertalizer_GUI fertalizer_gui;
 	private static final long serialVersionUID = 2074814726152549528L;
 	private JPanel contentPane;
 	private JPanel panel;
@@ -33,8 +35,10 @@ public class HMIstart extends JFrame {
 	private JPanel panel_3;
 	private Temperature_GUI temp_gui;
 	private Co2_GUI co2_gui;
+	private Water_GUI water_gui;
 	private JPanel panel_4;
 	private JLabel lblPlantNr;
+	
 
 	/**
 	 * Launch the application.
@@ -86,11 +90,13 @@ public class HMIstart extends JFrame {
 		this.co2_btn.setPreferredSize(new Dimension(155,105));
 		
 		this.fertalize_btn = new JButton("Fertalizing");
+		this.fertalize_btn.addActionListener(new Fertalize_btnActionListener());
 		this.panel_2.add(this.fertalize_btn);
 		this.fertalize_btn.setPreferredSize(new Dimension(155,105));
 		this.fertalize_btn.setFont(font);
 		
 		this.light_btn = new JButton("Light Levels");
+		this.light_btn.addActionListener(new Light_btnActionListener());
 		this.panel_2.add(this.light_btn);
 		this.light_btn.setPreferredSize(new Dimension(155,105));
 		this.light_btn.setFont(font);
@@ -115,6 +121,7 @@ public class HMIstart extends JFrame {
 		
 		
 		this.water_btn = new JButton("Water Level");
+		this.water_btn.addActionListener(new Water_btnActionListener());
 		this.panel_3.add(this.water_btn);
 		this.water_btn.setPreferredSize(new Dimension(155, 105));
 		this.water_btn.setFont(font);
@@ -130,6 +137,15 @@ public class HMIstart extends JFrame {
 		
 		co2_gui = new Co2_GUI();
 		co2_gui.setVisible(false);
+		
+		water_gui = new Water_GUI();
+		water_gui.setVisible(false);
+		
+		fertalizer_gui = new Fertalizer_GUI();
+		fertalizer_gui.setVisible(false);
+		
+		light_gui = new Light_GUI();
+		light_gui.setVisible(false);
 		
 		
 	}
@@ -147,6 +163,26 @@ public class HMIstart extends JFrame {
 			
 			co2_gui.setVisible(true);
 		}
+	}
+	private class Water_btnActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			water_gui.setVisible(true);
+		}
+	}
+	private class Fertalize_btnActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			fertalizer_gui.setVisible(true);
+		}
+	}
+	private class Light_btnActionListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			light_gui.setVisible(true);
+		}
+		
 	}
 	
 }

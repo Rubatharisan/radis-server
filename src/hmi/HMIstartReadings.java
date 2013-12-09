@@ -295,6 +295,7 @@ public class HMIstartReadings extends JPanel {
 		    	Calendar cal = Calendar.getInstance();
 		    	updaterLabel.setText(dateFormat.format(cal.getTime()));
 		    	System.out.println(dateFormat.format(cal.getTime()));
+
 		    	
 		    	
 		    }
@@ -308,20 +309,23 @@ public class HMIstartReadings extends JPanel {
 	}
 
 	public void setFonts(){
-		Component[] cl_left_components = CL_left.getComponents();
 		
+		Component[] cl_left_components = CL_left.getComponents();
 		for(int i = 0; i < cl_left_components.length;i++)
 		{
 			cl_left_components[i].setFont(text_title);
 		}
+		
 		Component[] cl_right_components = CL_right.getComponents();
 		for(int i = 0; i < cl_right_components.length;i++){
 			cl_right_components[i].setFont(text);
 		}
+		
 		Component[] cr_left_components = CR_left.getComponents();
 		for(int i = 0; i < cr_left_components.length;i++){
 			cr_left_components[i].setFont(text_title);
 		}
+		
 		Component [] cr_right_componetns = CR_right.getComponents();
 		for(int i = 0; i < cr_right_componetns.length;i++){
 			cr_right_componetns[i].setFont(text);

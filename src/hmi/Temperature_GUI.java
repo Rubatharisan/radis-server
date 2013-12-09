@@ -63,6 +63,7 @@ public class Temperature_GUI extends JFrame {
 	public Temperature_GUI() {
 		
 	    thread.start();
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1150, 600);
 		contentPane = new JPanel();
@@ -189,7 +190,6 @@ public class Temperature_GUI extends JFrame {
 	}
 	private class BtnUpActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-		
 			double current_temp = Double.valueOf(textField.getText().substring(0, 3)) +1.0;
 			temp.setTemperature(current_temp);
 			textField.setText(String.valueOf(current_temp)+" \u2103");
@@ -202,6 +202,7 @@ public class Temperature_GUI extends JFrame {
 			double current_temp = Double.valueOf(textField.getText().substring(0, 3)) -1.0;
 			temp.setTemperature(current_temp);
 			textField.setText(String.valueOf(current_temp)+" \u2103");
+			
 			
 		}
 	}
