@@ -28,6 +28,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ButtonGroup;
 
+import data.Data;
+
 public class Light_GUI extends JFrame {
 
 	private JPanel contentPane;
@@ -55,6 +57,7 @@ public class Light_GUI extends JFrame {
 	private JToggleButton redToggle;
 	private JToggleButton blueToggle;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private Timer dataLog = new Timer(30*1000,new dataLogger());
 
 	/**
 	 * Launch the application.
@@ -242,6 +245,7 @@ public class Light_GUI extends JFrame {
 			
 		});
 		updater.start();
+		dataLog.start();
 		
 	}
 
@@ -287,4 +291,19 @@ public class Light_GUI extends JFrame {
 			
 		}
 	}
+	private class dataLogger implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Data sender = new Data();
+			sender.insertLight(simulator.getRed_level(),simulator.getBlue_level());
+			System.out.println("red: " + simulator.getRed_level() + " and blue: "+simulator.getBlue_level()+ 
+					" was logged into database");
+			
+			
+		}
+		
+	}
 }
+

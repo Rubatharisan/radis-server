@@ -16,6 +16,7 @@ import javax.swing.BoxLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -28,6 +29,7 @@ import javax.swing.JTextField;
 
 import components.CO2_sim;
 import components.Temp_sim;
+import data.Data;
 
 public class HMIstartReadings extends JPanel {
 	private JPanel center_panel;
@@ -73,10 +75,10 @@ public class HMIstartReadings extends JPanel {
 	private JLabel Co2_current_read;
 	private JLabel fertalize_current_read;
 	private JLabel label_11;
-	private JLabel label_12;
-	private JLabel label_13;
-	private JLabel label_14;
-	private JLabel label_15;
+	private JLabel red_current_read;
+	private JLabel blue_current_read;
+	private JLabel air_current_read;
+	private JLabel water_current_read;
 	private JPanel center_centerpanel;
 	private JPanel panel;
 	private JLabel lblLastUpdated;
@@ -238,17 +240,17 @@ public class HMIstartReadings extends JPanel {
 		this.label_11 = new JLabel("-----");
 		this.CR_right.add(this.label_11);
 		
-		this.label_12 = new JLabel("--");
-		this.CR_right.add(this.label_12);
+		this.red_current_read = new JLabel("--");
+		this.CR_right.add(this.red_current_read);
 		
-		this.label_13 = new JLabel("--");
-		this.CR_right.add(this.label_13);
+		this.blue_current_read = new JLabel("--");
+		this.CR_right.add(this.blue_current_read);
 		
-		this.label_14 = new JLabel("--");
-		this.CR_right.add(this.label_14);
+		this.air_current_read = new JLabel("--");
+		this.CR_right.add(this.air_current_read);
 		
-		this.label_15 = new JLabel("--");
-		this.CR_right.add(this.label_15);
+		this.water_current_read = new JLabel("--");
+		this.CR_right.add(this.water_current_read);
 		
 		this.center_centerpanel = new JPanel();
 		this.center_panel.add(this.center_centerpanel, BorderLayout.CENTER);
@@ -287,7 +289,7 @@ public class HMIstartReadings extends JPanel {
 		this.label.setFont(header);
 		this.header_panel.add(this.label);
 		setFonts();
-		init();
+		
 		
 		final Timer updater = new Timer(5000, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -295,8 +297,7 @@ public class HMIstartReadings extends JPanel {
 		    	Calendar cal = Calendar.getInstance();
 		    	updaterLabel.setText(dateFormat.format(cal.getTime()));
 		    	System.out.println(dateFormat.format(cal.getTime()));
-
-		    	
+		    	init();
 		    	
 		    }
 		});
@@ -304,7 +305,22 @@ public class HMIstartReadings extends JPanel {
 
 	}
 	public void init(){
-		//Metode der skal hente Hvilke produkt der bliver berarbejdet.
+		Data getRead = new Data();
+		String[] readings;
+		try {
+			readings = getRead.getReadings();
+			
+			
+			Co2_current_read.setText(readings[0]);
+			fertalize_current_read.setText(readings[1] + " : "+readings[2]);
+			red_current_read.setText(readings[3]);
+			blue_current_read.setText(readings[4]);
+			water_current_read.setText(readings[5]);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		
 	}
 

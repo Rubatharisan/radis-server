@@ -20,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
 
+import data.Data;
+
 public class Fertalizer_GUI extends JFrame {
 
 	private Fertilizer_sim simulator;
@@ -100,6 +102,8 @@ public class Fertalizer_GUI extends JFrame {
 		textArea.append("Fertalize Nr: "+simulator.Fertalizer_getCount()+" ----------- Fertalized" +
 				" at: " + dateFormat.format(cal.getTime()) +"\n");
 		updater.start();
+		Timer dataLogger = new Timer(30*1000, new DataLogger());
+		dataLogger.start();
 	}
 	
 	private class BtnNewButtonActionListener implements ActionListener {
@@ -130,6 +134,21 @@ public class Fertalizer_GUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			setVisible(false);
 		}
+	}
+	private class DataLogger implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	    	Calendar cal = Calendar.getInstance();
+			
+			Data sender = new Data();
+			sender.insertFertilize(simulator.Fertalizer_getCount(),dateFormat.format(cal.getTime()));
+			System.out.println(simulator.Fertalizer_getCount() + " and "+dateFormat.format(cal.getTime()) + " was logged into the fertilize database");
+			
+		}
+		
 	}
 	
 

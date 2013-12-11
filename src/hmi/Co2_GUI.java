@@ -1,5 +1,6 @@
 package hmi;
 
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -30,6 +31,7 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
 import components.CO2_sim;
+import data.Data;
 
 public class Co2_GUI extends JFrame {
 
@@ -44,6 +46,7 @@ public class Co2_GUI extends JFrame {
 	private JPanel panel_3;
 	private TimeSeries series;
 	private Timer timer = new Timer(250, new tempListener());
+	private Timer sender = new Timer(30*1000, new dataLogger());
 	private CO2_sim simulator;
 	private JButton btnReturn;
 	private Font font_on;
@@ -166,6 +169,7 @@ public class Co2_GUI extends JFrame {
 	        timer.start();
 	        updater.start();
 	        onoffupdater.start();
+	        sender.start();
 	        
 	        
 		
@@ -240,6 +244,20 @@ public class Co2_GUI extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 			}
+		}
+		private class dataLogger implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Data sender = new Data();
+				 DecimalFormat df = new DecimalFormat("0000.00");
+		    	 String getDouble = df.format(simulator.getCo2());
+		    	 double logTemp = Double.valueOf(getDouble.subSequence(0, 4) +"."+getDouble.substring(5, 7));
+				sender.insertCO2(logTemp);
+				System.out.println(logTemp + " was logged into the co2_level database");
+			}
+			
 		}
 		
 }

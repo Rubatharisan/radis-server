@@ -26,6 +26,8 @@ import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 
 import components.Water_sim;
+import data.Data;
+
 import javax.swing.BoxLayout;
 import javax.swing.JToggleButton;
 import javax.swing.JLabel;
@@ -49,6 +51,7 @@ public class Water_GUI extends JFrame {
 	private JTextField current_read;
 	private Font font_on;
 	private JButton btnReturn;
+	private Timer dataLog = new Timer(30*1000,new dataLogger());
 	/**
 	 * Launch the application.
 	 */
@@ -166,7 +169,7 @@ public class Water_GUI extends JFrame {
 		this.contentPane.add(chartPanel, BorderLayout.CENTER);
 		onoffupdater.start();
 		timer.start();
-		
+		dataLog.start();
 	}
 	
 	private JFreeChart createChart(final XYDataset dataset) {
@@ -240,6 +243,20 @@ public class Water_GUI extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			setVisible(false);
 		}
+	}
+	private class dataLogger implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			Data sender = new Data();
+			DecimalFormat df = new DecimalFormat("00.00");
+	    	String getDouble = df.format(simulator.getWaterLevel());
+	    	double logTemp = Double.valueOf(getDouble.subSequence(0, 2) +"."+getDouble.substring(3, 5));
+			sender.insertWater(logTemp);
+			System.out.println();
+		}
+		
 	}
 	
 

@@ -27,6 +27,8 @@ import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
 import components.Temp_sim;
+import data.Data;
+
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 
@@ -39,6 +41,7 @@ public class Temperature_GUI extends JFrame {
 	private JTextField textField;
 	private TimeSeries series;
 	private Timer timer = new Timer(250, new tempListener());
+	private Timer sender = new Timer(30*1000, new dataLogger());
 	Temp_sim temp = new Temp_sim();
     Thread thread = new Thread(temp);
     private JTextField textField_1;
@@ -142,6 +145,7 @@ public class Temperature_GUI extends JFrame {
 	    chartPanel.setPreferredSize(new java.awt.Dimension(800, 500));
 	    center.add(chartPanel);
 	        timer.start();
+	        sender.start();
 	}
 	
     private JFreeChart createChart(final XYDataset dataset) {
@@ -188,6 +192,15 @@ public class Temperature_GUI extends JFrame {
 		        
 		    }
 	}
+	private class dataLogger implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			sendData(temp.getTemperature());
+		}
+		
+	}
 	private class BtnUpActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			double current_temp = Double.valueOf(textField.getText().substring(0, 3)) +1.0;
@@ -212,5 +225,13 @@ public class Temperature_GUI extends JFrame {
 			setVisible(false);
 		}
 	}
-
+	public void sendData(double send_temp){
+		 Data sender = new Data();
+		 DecimalFormat df = new DecimalFormat("000.00");
+    	 String getDouble = df.format(temp.getTemperature());
+    	 double logTemp = Double.valueOf(getDouble.subSequence(0, 3) +"."+getDouble.substring(4, 6));
+		 sender.insertTemp(logTemp);
+		 System.out.println(logTemp + " was logged into temp database");
+		
+	}
 }

@@ -14,12 +14,12 @@ public class CO2_sim implements Runnable {
 		{
 			if(operator_Bool == true){
 				co2 = co2+5;
-				System.out.println("OPERATOR valve is on: Co2 level = "+co2);
+//				System.out.println("OPERATOR valve is on: Co2 level = "+co2);
 			}
 			else{
 			if(bool == true && operator_Bool == false){
 				co2 = co2+5;
-				System.out.println("CO2 Level \t"+co2);
+//				System.out.println("CO2 Level \t"+co2);
 				if(co2 > 420){
 					bool = false;
 				}

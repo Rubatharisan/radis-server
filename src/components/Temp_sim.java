@@ -1,5 +1,6 @@
 package components;
 
+import data.Data;
 import hmi.HMIstartReadings;
 
 public class Temp_sim implements Runnable {
@@ -7,15 +8,22 @@ public class Temp_sim implements Runnable {
 	private double temperature = 21.0;
 	private double set_temp = 21.0;
 	private long sleeptime = 100;
+	private double send_temp;
+	
+
+	
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-
+		final Data send = new Data();
+		
 		while(true){
-	
+			
 			if(temperature <= set_temp)
 			{
 				temperature = temperature +0.1;
+		
 				
 			}
 			else if(temperature > set_temp)
@@ -28,6 +36,7 @@ public class Temp_sim implements Runnable {
 						for(double i = 0.0; i < 2.0;i = i+0.05)
 						{
 							temperature = temperature -0.05;
+						
 						//	System.out.println("Temperature is: \t"+temperature);
 							try {
 								Thread.sleep(sleeptime);
@@ -40,6 +49,8 @@ public class Temp_sim implements Runnable {
 					} 
 					
 				}.run();
+				
+				
 			}
 		//	System.out.println("Temperature is: \t"+temperature);
 		
@@ -49,6 +60,7 @@ public class Temp_sim implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
 			
 		}
 		
@@ -66,6 +78,7 @@ public class Temp_sim implements Runnable {
 	public double getSetTemp(){
 		return set_temp;
 	}
+
 	
 
 }
