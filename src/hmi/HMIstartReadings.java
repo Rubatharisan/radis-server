@@ -94,7 +94,7 @@ public class HMIstartReadings extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public HMIstartReadings() {
+	public HMIstartReadings(Configuration config) {
 		setLayout(new BorderLayout(0, 0));
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		
@@ -162,24 +162,30 @@ public class HMIstartReadings extends JPanel {
 		
 		this.co2_recRead = new JLabel("--");
 		this.CL_right.add(this.co2_recRead);
+		this.co2_recRead.setText(String.valueOf(config.getCo2_level()));
 		
 		this.fertalize_recRead = new JLabel("--");
 		this.CL_right.add(this.fertalize_recRead);
+		this.fertalize_recRead.setText("once in 30sec");
 		
 		this.lightLevels_spacout = new JLabel("-----");
 		this.CL_right.add(this.lightLevels_spacout);
 		
 		this.red_recRead = new JLabel("--");
 		this.CL_right.add(this.red_recRead);
+		this.red_recRead.setText(String.valueOf(config.getRed_level()));
 		
 		this.blue_recRead = new JLabel("--");
 		this.CL_right.add(this.blue_recRead);
+		this.blue_recRead.setText(String.valueOf(config.getBlue_level()));
 		
 		this.temperature_recRead = new JLabel("--");
 		this.CL_right.add(this.temperature_recRead);
+		this.temperature_recRead.setText(String.valueOf(config.getTemp()));
 		
 		this.water_recRead = new JLabel("--");
 		this.CL_right.add(this.water_recRead);
+		this.water_recRead.setText("20%");
 		
 		this.center_rightKeeper = new JPanel();
 		this.center_panel.add(this.center_rightKeeper, BorderLayout.EAST);

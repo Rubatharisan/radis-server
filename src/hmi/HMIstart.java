@@ -38,28 +38,15 @@ public class HMIstart extends JFrame {
 	private Water_GUI water_gui;
 	private JPanel panel_4;
 	private JLabel lblPlantNr;
+	private Configuration configuration;
 	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HMIstart frame = new HMIstart();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
 	 */
-	public HMIstart() {
+	public HMIstart(Configuration config) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 631, 722);
 		this.contentPane = new JPanel();
@@ -126,11 +113,12 @@ public class HMIstart extends JFrame {
 		this.water_btn.setPreferredSize(new Dimension(155, 105));
 		this.water_btn.setFont(font);
 		
-		JPanel readings = new HMIstartReadings();
+		JPanel readings = new HMIstartReadings(config);
 		contentPane.add(readings);
 
 		UnitInit();
 	}
+
 	public void UnitInit(){
 		temp_gui = new Temperature_GUI();
 		temp_gui.setVisible(false);
