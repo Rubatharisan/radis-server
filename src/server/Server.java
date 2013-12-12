@@ -4,8 +4,6 @@ import hmi.HMIstart;
 
 import java.net.*;
 import java.io.*;
-
-import client.Bike;
 import client.Configuration;
 
 public class Server extends Thread

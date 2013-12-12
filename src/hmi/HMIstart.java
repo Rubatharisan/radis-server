@@ -49,6 +49,7 @@ public class HMIstart extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public HMIstart(Configuration config) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 631, 722);
