@@ -28,6 +28,8 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 
+import client.Configuration;
+
 import components.CO2_sim;
 import components.Temp_sim;
 import data.Data;

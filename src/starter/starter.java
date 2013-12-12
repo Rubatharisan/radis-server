@@ -1,6 +1,6 @@
 package starter;
 
-import hmi.Configuration;
+import client.Configuration;
 import hmi.HMIstart;
 
 public class starter {

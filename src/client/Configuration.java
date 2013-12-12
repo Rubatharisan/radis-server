@@ -1,6 +1,12 @@
-package hmi;
+package client;
 
-public class Configuration{
+import java.io.Serializable;
+
+public class Configuration implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1609385722150252215L;
 	private double co2_level;
 	private int red_level;
 	private int blue_level;

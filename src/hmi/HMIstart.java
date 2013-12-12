@@ -12,6 +12,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+
+import client.Configuration;
+
 import java.awt.Component;
 
 public class HMIstart extends JFrame {
