@@ -51,28 +51,10 @@ public class Co2_GUI extends JFrame {
 	private JButton btnReturn;
 	private Font font_on;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Co2_GUI frame = new Co2_GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
-	public Co2_GUI() {
+	public Co2_GUI(double def_co2) {
 		font_on = new Font("Tahoma",Font.BOLD,24);
-		simulator = new CO2_sim();
+		simulator = new CO2_sim(def_co2);
 		Thread thread = new Thread(simulator);
 		thread.start();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -170,7 +152,7 @@ public class Co2_GUI extends JFrame {
 	        updater.start();
 	        onoffupdater.start();
 	        sender.start();
-	        
+	        setVisible(true);
 	        
 		
 	}

@@ -5,18 +5,23 @@ import hmi.HMIstartReadings;
 
 public class Temp_sim implements Runnable {
 
-	private double temperature = 21.0;
-	private double set_temp = 21.0;
+	private double temperature;
+	private double set_temp;
 	private long sleeptime = 100;
-	private double send_temp;
+//	private double send_temp;
 	
 
 	
+
+	public Temp_sim(double de_temp) {
+		// TODO Auto-generated constructor stub
+		this.temperature = de_temp;
+		this.set_temp = de_temp;
+	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		final Data send = new Data();
 		
 		while(true){
 			

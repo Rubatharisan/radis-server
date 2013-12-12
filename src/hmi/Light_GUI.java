@@ -59,27 +59,12 @@ public class Light_GUI extends JFrame {
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private Timer dataLog = new Timer(30*1000,new dataLogger());
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Light_GUI frame = new Light_GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
-	public Light_GUI() {
-		simulator = new Light_sim();
+
+	public Light_GUI(int red_level, int blue_level) {
+		//this.red_level = red_level;
+		//this.blue_level = blue_level;
+		simulator = new Light_sim(red_level,blue_level);
 		thread = new Thread(simulator);
 		thread.start();
 		simulator.setRed_status(true);

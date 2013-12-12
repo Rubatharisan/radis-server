@@ -36,13 +36,14 @@ public class Server extends Thread
             
             try {
             	 Configuration rec = (Configuration) objectIn.readObject();
-            	 HMIstart hmiStart = new HMIstart(rec);
-            	 hmiStart.setVisible(true);
+            	 startHMI(rec);
+
 //				System.out.println("Object Received: width: "+rec.getWidth()+" height: "+rec.getHeight());
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+            
             DataOutputStream out =
                  new DataOutputStream(server.getOutputStream());
             out.writeUTF("Thank you for connecting to "
@@ -70,6 +71,10 @@ public class Server extends Thread
       {
          e.printStackTrace();
       }
+   }
+   private void startHMI(Configuration config){
+  	 HMIstart hmiStart = new HMIstart(config);
+  	 hmiStart.setVisible(true);
    }
 }
 

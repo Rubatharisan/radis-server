@@ -91,6 +91,7 @@ public class HMIstartReadings extends JPanel {
 	private JSeparator separator;
 	private JLabel temp_current_read;
 	private JLabel label_9;
+	private JLabel label_10;
 
 
 	/**
@@ -181,13 +182,16 @@ public class HMIstartReadings extends JPanel {
 		this.CL_right.add(this.blue_recRead);
 		this.blue_recRead.setText(String.valueOf(config.getBlue_level()));
 		
+		this.label_10 = new JLabel("----");
+		this.CL_right.add(this.label_10);
+		
 		this.temperature_recRead = new JLabel("--");
 		this.CL_right.add(this.temperature_recRead);
 		this.temperature_recRead.setText(String.valueOf(config.getTemp()));
 		
 		this.water_recRead = new JLabel("--");
 		this.CL_right.add(this.water_recRead);
-		this.water_recRead.setText("20%");
+		this.water_recRead.setText("10%");
 		
 		this.center_rightKeeper = new JPanel();
 		this.center_panel.add(this.center_rightKeeper, BorderLayout.EAST);
@@ -310,7 +314,7 @@ public class HMIstartReadings extends JPanel {
 		init();
 		
 		
-		final Timer updater = new Timer(30*1000, new ActionListener() {
+		final Timer updater = new Timer(35*1000, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		    	Calendar cal = Calendar.getInstance();

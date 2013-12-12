@@ -2,11 +2,16 @@ package components;
 
 public class CO2_sim implements Runnable {
 
-	private double co2 = 400.0; //unit = "ppm"
+	private double co2; //unit = "ppm"
+	private double set_co2;
 	private long sleeptime = 1000;
 	private boolean bool = false;
 	private boolean operator_Bool = false;
 	
+	public CO2_sim(double set_co2){
+		this.set_co2 = set_co2;
+		this.co2 = set_co2;
+	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -20,12 +25,12 @@ public class CO2_sim implements Runnable {
 			if(bool == true && operator_Bool == false){
 				co2 = co2+5;
 //				System.out.println("CO2 Level \t"+co2);
-				if(co2 > 420){
+				if(co2 > set_co2+10){
 					bool = false;
 				}
 			}else if(bool == false && operator_Bool == false){
 				co2 = co2-0.3;
-				if(co2 < 405){
+				if(co2 < set_co2){
 					bool = true;
 				}
 			}

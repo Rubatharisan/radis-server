@@ -41,7 +41,7 @@ public class HMIstart extends JFrame {
 	private Water_GUI water_gui;
 	private JPanel panel_4;
 	private JLabel lblPlantNr;
-	private Configuration configuration;
+	private Configuration config;
 	
 
 
@@ -51,6 +51,7 @@ public class HMIstart extends JFrame {
 	 */
 	
 	public HMIstart(Configuration config) {
+		this.config = config;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 631, 722);
 		this.contentPane = new JPanel();
@@ -124,10 +125,10 @@ public class HMIstart extends JFrame {
 	}
 
 	public void UnitInit(){
-		temp_gui = new Temperature_GUI();
+		temp_gui = new Temperature_GUI(config.getTemp());
 		temp_gui.setVisible(false);
-		
-		co2_gui = new Co2_GUI();
+	
+		co2_gui = new Co2_GUI(config.getCo2_level());
 		co2_gui.setVisible(false);
 		
 		water_gui = new Water_GUI();
@@ -136,7 +137,7 @@ public class HMIstart extends JFrame {
 		fertalizer_gui = new Fertalizer_GUI();
 		fertalizer_gui.setVisible(false);
 		
-		light_gui = new Light_GUI();
+		light_gui = new Light_GUI(config.getRed_level(),config.getBlue_level());
 		light_gui.setVisible(false);
 		
 		

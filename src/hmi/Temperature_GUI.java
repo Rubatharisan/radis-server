@@ -42,29 +42,18 @@ public class Temperature_GUI extends JFrame {
 	private TimeSeries series;
 	private Timer timer = new Timer(250, new tempListener());
 	private Timer sender = new Timer(30*1000, new dataLogger());
-	Temp_sim temp = new Temp_sim();
-    Thread thread = new Thread(temp);
+	Temp_sim temp;
+    Thread thread;
     private JTextField textField_1;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Temperature_GUI frame = new Temperature_GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	@SuppressWarnings("deprecation")
-	public Temperature_GUI() {
-		
+	public Temperature_GUI(double de_temp) {
+		temp = new Temp_sim(de_temp);
+		thread = new Thread(temp);
 	    thread.start();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

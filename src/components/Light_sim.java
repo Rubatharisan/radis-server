@@ -2,13 +2,17 @@ package components;
 
 public class Light_sim implements Runnable {
 
-	private int red_level = 200;
-	private int blue_level = 200;
+	private int red_level;
+	private int blue_level;
 	private long sleeptime = 1; 	//timer*60(min)*60(sec)*1000(ms); men 
 									//lige nu, 5 sek for funktionalitet
 	private boolean red_status;
 	private boolean blue_status ;
 	
+	public Light_sim(int red_level, int blue_level){
+		this.red_level = red_level;
+		this.blue_level = blue_level;
+	}
 	
 	@Override
 	public void run() {
