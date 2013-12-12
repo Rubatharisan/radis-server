@@ -1,6 +1,7 @@
 package hmi;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -74,7 +75,6 @@ public class HMIstartReadings extends JPanel {
 	private JLabel label_8;
 	private JLabel Co2_current_read;
 	private JLabel fertalize_current_read;
-	private JLabel label_11;
 	private JLabel red_current_read;
 	private JLabel blue_current_read;
 	private JLabel air_current_read;
@@ -86,6 +86,9 @@ public class HMIstartReadings extends JPanel {
 	private JLabel lblLastRead;
 	private Temp_sim temp_sim;
 	private double temp;
+	private JSeparator separator;
+	private JLabel temp_current_read;
+	private JLabel label_9;
 
 
 	/**
@@ -155,7 +158,7 @@ public class HMIstartReadings extends JPanel {
 		this.CL_right = new JPanel();
 		this.center_left.add(this.CL_right);
 		this.CL_right.setLayout(new BoxLayout(this.CL_right, BoxLayout.PAGE_AXIS));
-		this.CL_right.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		this.CL_right.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 		
 		this.co2_recRead = new JLabel("--");
 		this.CL_right.add(this.co2_recRead);
@@ -237,8 +240,11 @@ public class HMIstartReadings extends JPanel {
 		this.fertalize_current_read = new JLabel("--");
 		this.CR_right.add(this.fertalize_current_read);
 		
-		this.label_11 = new JLabel("-----");
-		this.CR_right.add(this.label_11);
+		this.label_9 = new JLabel("--");
+		this.CR_right.add(this.label_9);
+		
+//		this.separator = new JSeparator();
+//		this.CR_right.add(this.separator);
 		
 		this.red_current_read = new JLabel("--");
 		this.CR_right.add(this.red_current_read);
@@ -249,26 +255,30 @@ public class HMIstartReadings extends JPanel {
 		this.air_current_read = new JLabel("--");
 		this.CR_right.add(this.air_current_read);
 		
+		this.temp_current_read = new JLabel("---");
+		this.CR_right.add(this.temp_current_read);
+		
 		this.water_current_read = new JLabel("--");
 		this.CR_right.add(this.water_current_read);
 		
-		this.center_centerpanel = new JPanel();
-		this.center_panel.add(this.center_centerpanel, BorderLayout.CENTER);
-		this.center_centerpanel.setLayout(new BorderLayout(0, 0));
-		
 		this.panel = new JPanel();
-		this.center_centerpanel.add(this.panel, BorderLayout.SOUTH);
+		this.center_rightKeeper.add(this.panel);
 		this.panel.setLayout(new BoxLayout(this.panel, BoxLayout.PAGE_AXIS));
 		
 		this.lblLastRead = new JLabel("last read:");
 		this.panel.add(this.lblLastRead);
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-    	Calendar cal = Calendar.getInstance();
+		
 		this.updaterLabel = new JTextField(14);
 		this.panel.add(this.updaterLabel);
 		this.updaterLabel.setEditable(false);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+    	Calendar cal = Calendar.getInstance();
 		this.updaterLabel.setText(dateFormat.format(cal.getTime()));
+		
+		this.center_centerpanel = new JPanel();
+		this.center_panel.add(this.center_centerpanel, BorderLayout.CENTER);
+		this.center_centerpanel.setLayout(new BorderLayout(0, 0));
 		
 		this.footer_panel = new JPanel();
 		add(this.footer_panel, BorderLayout.SOUTH);
@@ -289,9 +299,10 @@ public class HMIstartReadings extends JPanel {
 		this.label.setFont(header);
 		this.header_panel.add(this.label);
 		setFonts();
+		init();
 		
 		
-		final Timer updater = new Timer(5000, new ActionListener() {
+		final Timer updater = new Timer(30*1000, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 		    	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		    	Calendar cal = Calendar.getInstance();
@@ -315,7 +326,8 @@ public class HMIstartReadings extends JPanel {
 			fertalize_current_read.setText(readings[1] + " : "+readings[2]);
 			red_current_read.setText(readings[3]);
 			blue_current_read.setText(readings[4]);
-			water_current_read.setText(readings[5]);
+			temp_current_read.setText(readings[5]);
+			water_current_read.setText(readings[6]);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -340,12 +352,16 @@ public class HMIstartReadings extends JPanel {
 		Component[] cr_left_components = CR_left.getComponents();
 		for(int i = 0; i < cr_left_components.length;i++){
 			cr_left_components[i].setFont(text_title);
+//			((JLabel) cr_left_components[i]).setBorder(BorderFactory.createEmptyBorder(4,4,4,4));
 		}
 		
 		Component [] cr_right_componetns = CR_right.getComponents();
 		for(int i = 0; i < cr_right_componetns.length;i++){
 			cr_right_componetns[i].setFont(text);
+
+//			((JLabel) cr_right_componetns[i]).setBorder(BorderFactory.createEmptyBorder(04, 04, 04, 04));
 		}
+		
 	}
 
 }

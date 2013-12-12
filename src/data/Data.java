@@ -119,21 +119,25 @@ public class Data {
 		String red_light = null;
 		String blue_light = null;
 		String waterlevel = null;
-		int rows = getRows();
+		String temperature = null;
+		int rows = getRows()-1;
 
 		
-		rs.next();
-			rs = st.executeQuery("SELECT lightdata.count,co2_level.co2_level,temp.temp,fertilizedata.fertilizecount,fertilizedata.fertalizedate,lightdata.red_level,lightdata.blue_level,waterlevel.waterlevel FROM co2_level INNER JOIN temp ON co2_level.count = temp.count INNER JOIN fertilizedata ON fertilizedata.count = co2_level.count INNER JOIN lightdata ON lightdata.count = co2_level.count INNER JOIN waterlevel ON waterlevel.count=co2_level.count WHERE lightdata.count ='"+rows+"'");
-//			ps = con.prepareStatement("SELECT lightdata.count,co2_level.co2_level,temp.temp,fertilizedata.fertilizecount,fertilizedata.fertalizedate,lightdata.red_level,lightdata.blue_level,waterlevel.waterlevel FROM co2_level INNER JOIN temp ON co2_level.count = temp.count INNER JOIN fertilizedata ON fertilizedata.count = co2_level.count INNER JOIN lightdata ON lightdata.count = co2_level.count INNER JOIN waterlevel ON waterlevel.count=co2_level.count WHERE lightdata.count ='"+rows+"'");
+			System.out.println(rows);
+
+//			rs = st.executeQuery("SELECT lightdata.count,co2_level.co2_level,temp.temp,fertilizedata.fertilizecount,fertilizedata.fertalizedate,lightdata.red_level,lightdata.blue_level,waterlevel.waterlevel FROM co2_level INNER JOIN temp ON co2_level.count = temp.count INNER JOIN fertilizedata ON fertilizedata.count = co2_level.count INNER JOIN lightdata ON lightdata.count = co2_level.count INNER JOIN waterlevel ON waterlevel.count=co2_level.count WHERE lightdata.count = '+"+ (rows-1) +"+';");
 			
-//			ps.execute();
-//			rs = ps.getResultSet();
+			ps = con.prepareStatement("SELECT lightdata.count,co2_level.co2_level,temp.temp,fertilizedata.fertilizecount,fertilizedata.fertalizedate,lightdata.red_level,lightdata.blue_level,waterlevel.waterlevel FROM co2_level INNER JOIN temp ON co2_level.count = temp.count INNER JOIN fertilizedata ON fertilizedata.count = co2_level.count INNER JOIN lightdata ON lightdata.count = co2_level.count INNER JOIN waterlevel ON waterlevel.count=co2_level.count WHERE lightdata.count =?;");
+			ps.setInt(1, rows);
+			rs = ps.executeQuery();
+			
 			System.out.println("has done a query");		
-			
+			rs.next();
 			System.out.println("called a next");
 			
 			co2_level = String.valueOf(rs.getDouble("co2_level"));
 			System.out.println("loaded co2");
+			
 			fertilizeCount = String.valueOf(rs.getInt("fertilizecount"));
 			System.out.println("loaded ferta_count");
 			fertilizeDate = rs.getString("fertalizedate");
@@ -142,11 +146,13 @@ public class Data {
 			System.out.println("loaded red");
 			blue_light = String.valueOf(rs.getInt("blue_level"));
 			System.out.println("loaded blue");
+			temperature = String.valueOf(rs.getDouble("temp"));
 			waterlevel = String.valueOf(rs.getInt("waterlevel"));
 			System.out.println("loaded water");
 			System.out.println("has loaded strings");
 			
-			String[] readings = {co2_level,fertilizeCount,fertilizeDate,red_light,blue_light,waterlevel};
+			
+			String[] readings = {co2_level,fertilizeCount,fertilizeDate,red_light,blue_light,temperature,waterlevel};
 		return readings;
 		
 		

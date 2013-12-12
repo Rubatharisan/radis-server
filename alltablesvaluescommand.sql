@@ -1,1 +1,4 @@
 SELECT lightdata.count,co2_level.co2_level,temp.temp,fertilizedata.fertilizecount,fertilizedata.fertalizedate,lightdata.red_level,lightdata.blue_level,waterlevel.waterlevel FROM co2_level INNER JOIN temp ON co2_level.count = temp.count INNER JOIN fertilizedata ON fertilizedata.count = co2_level.count INNER JOIN lightdata ON lightdata.count = co2_level.count INNER JOIN waterlevel ON waterlevel.count=co2_level.count WHERE lightdata.count = '4';
+
+
+SELECT lightdata.count,co2_level.co2_level,temp.temp,fertilizedata.fertilizecount,fertilizedata.fertalizedate,lightdata.red_level,lightdata.blue_level,waterlevel.waterlevel FROM co2_level INNER JOIN temp ON co2_level.count = temp.count INNER JOIN fertilizedata ON fertilizedata.count = co2_level.count INNER JOIN lightdata ON lightdata.count = co2_level.count INNER JOIN waterlevel ON waterlevel.count=co2_level.count;
