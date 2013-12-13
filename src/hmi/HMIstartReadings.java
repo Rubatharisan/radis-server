@@ -92,12 +92,15 @@ public class HMIstartReadings extends JPanel {
 	private JLabel temp_current_read;
 	private JLabel label_9;
 	private JLabel label_10;
+	private JLabel lblQuantity;
+	private JLabel readings_footerquantity;
 
 
 	/**
 	 * Create the panel.
 	 */
-	public HMIstartReadings(Configuration config) {
+	public HMIstartReadings(Configuration config, String prod_name) {
+		
 		setLayout(new BorderLayout(0, 0));
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		
@@ -300,9 +303,17 @@ public class HMIstartReadings extends JPanel {
 		
 		
 		this.readings_footerProduct = new JLabel("--");
+		this.readings_footerProduct.setText(prod_name);
 		this.footer_panel.add(this.readings_footerProduct);
 		this.readings_footerProduct.setFont(footer);
 		this.readings_footerTitle.setFont(footer);
+		
+		this.lblQuantity = new JLabel("Quantity:");
+		this.footer_panel.add(this.lblQuantity);
+		
+		this.readings_footerquantity = new JLabel("--");
+		this.footer_panel.add(this.readings_footerquantity);
+		//this.readings_footerquantity.setText()
 		
 		this.header_panel = new JPanel();
 		add(this.header_panel, BorderLayout.NORTH);
@@ -312,6 +323,7 @@ public class HMIstartReadings extends JPanel {
 		this.header_panel.add(this.label);
 		setFonts();
 		init();
+		
 		
 		
 		final Timer updater = new Timer(35*1000, new ActionListener() {

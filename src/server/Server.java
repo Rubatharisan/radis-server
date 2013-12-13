@@ -5,6 +5,8 @@ import hmi.HMIstart;
 import java.net.*;
 import java.io.*;
 import client.Configuration;
+import client.Recipe;
+import domain.Order;
 
 public class Server extends Thread
 {
@@ -12,7 +14,7 @@ public class Server extends Thread
    private ServerSocket serverSocket;
    public static int port = 7999;
    
-   public Server(int port) throws IOException
+   public Server() throws IOException
    {
       serverSocket = new ServerSocket(port);
       
@@ -35,8 +37,8 @@ public class Server extends Thread
             ObjectInputStream objectIn = new ObjectInputStream(server.getInputStream());
             
             try {
-            	 Configuration rec = (Configuration) objectIn.readObject();
-            	 startHMI(rec);
+            	 Recipe rec = (Recipe) objectIn.readObject();
+            	 startHMI(rec, rec.getProductName());
 
 //				System.out.println("Object Received: width: "+rec.getWidth()+" height: "+rec.getHeight());
 			} catch (ClassNotFoundException e) {
@@ -60,21 +62,10 @@ public class Server extends Thread
          }
       }
    }
-   public static void main(String [] args)
-   {
-      
-      try
-      {
-         Thread t = new Server(Server.port);
-         t.start();
-      }catch(IOException e)
-      {
-         e.printStackTrace();
-      }
-   }
-   private void startHMI(Configuration config){
+
+   private void startHMI(Recipe rec, String prod_name){
 	   
-  	 HMIstart hmiStart = new HMIstart(config);
+  	 HMIstart hmiStart = new HMIstart(rec,prod_name);
   	 hmiStart.setVisible(true);
   	 
    }

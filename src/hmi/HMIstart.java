@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -13,15 +14,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
+import client.Client;
 import client.Configuration;
+import client.Recipe;
 
 import java.awt.Component;
 
 public class HMIstart extends JFrame {
 
-	/**
-	 * 
-	 */
+
 	private Light_GUI light_gui;
 	private Fertalizer_GUI fertalizer_gui;
 	private static final long serialVersionUID = 2074814726152549528L;
@@ -42,16 +43,24 @@ public class HMIstart extends JFrame {
 	private JPanel panel_4;
 	private JLabel lblPlantNr;
 	private Configuration config;
-	
 
 
-
-	/**
-	 * Create the frame.
-	 */
-	
-	public HMIstart(Configuration config) {
-		this.config = config;
+	public HMIstart(Recipe rec, String prod_name) {
+		Client client = new Client();
+		Timer grow = new Timer(60000, new ActionListener(){
+		
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Client client = new Client();
+				client.sendStatus(true);
+				
+				
+			}
+			
+		});
+		client.sendStatus(false);
+		this.config = rec.getMyConfig();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 740);
 		this.contentPane = new JPanel();
@@ -118,13 +127,15 @@ public class HMIstart extends JFrame {
 		this.water_btn.setPreferredSize(new Dimension(155, 105));
 		this.water_btn.setFont(font);
 		
-		JPanel readings = new HMIstartReadings(config);
+		JPanel readings = new HMIstartReadings(rec.getMyConfig(), prod_name);
 		contentPane.add(readings);
 
 		UnitInit();
+		grow.start();
 	}
 
 	public void UnitInit(){
+		
 		temp_gui = new Temperature_GUI(config.getTemp());
 		temp_gui.setVisible(false);
 	
