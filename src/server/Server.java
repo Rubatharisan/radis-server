@@ -73,8 +73,10 @@ public class Server extends Thread
       }
    }
    private void startHMI(Configuration config){
+	   
   	 HMIstart hmiStart = new HMIstart(config);
   	 hmiStart.setVisible(true);
+  	 
    }
 }
 
