@@ -53,7 +53,7 @@ public class HMIstart extends JFrame {
 	public HMIstart(Configuration config) {
 		this.config = config;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 631, 722);
+		setBounds(100, 100, 650, 740);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(this.contentPane);
