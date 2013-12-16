@@ -6,7 +6,7 @@ import java.io.*;
 import server.Server;
 
 public class Client{
-	String serverName = "10.126.8.154";
+	String serverName = "10.126.25.104";
 	int port = 7998;
 	
 	public void sendStatus(boolean bool){

@@ -53,7 +53,7 @@ public class HMIstart extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Client client = new Client();
-				client.sendStatus(true);
+				client.sendStatus(false);
 				
 				
 			}

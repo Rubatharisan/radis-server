@@ -54,11 +54,7 @@ public class HMIpreStarter extends JFrame {
 			e.printStackTrace();
 		}
 		Client client = new Client();
-//		client.sendStatus(true);
-		if(client.getAlive() == true){
-			client.sendStatus(true);
-		}
-		else{System.out.println("Socket is not online");}
-	}
+		client.sendStatus(true);
 
+	}
 }
